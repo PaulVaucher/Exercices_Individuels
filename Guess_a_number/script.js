@@ -1,30 +1,33 @@
 
 
-function askNumber () {
-    let givenNumber = window.prompt ("Entrez un nombre")
-    console.log (givenNumber)
+function askNumber() {
+    let givenNumber = window.prompt("Entrez un nombre")
+    console.log(givenNumber)
     return givenNumber
 }
 
-askNumber()
+//askNumber()
 
-function didIWin (givenNumber) {
-    givenNumber = askNumber()
-    if (givenNumber<22) {
-        alert("Plus grand")
-    }
-    else if (givenNumber>22) {
-        alert("Plus petit”")
-    }
-    else {
-        alert("Bravo ! Vous avez deviné le nombre")
+function didIWin(givenNumber) {
+    givenNumber = Number(askNumber())
+    if (givenNumber === 22) {
+        return true
+    } else {
+        return false
     }
 }
 
-didIWin()
+//console.log (didIWin())
 
-function gamePlay () {
-    if (askNumber!==22) {
+function gamePlay() {
+    if (didIWin () !== true) {
         askNumber()
+        console.log ("raté")
+    } else {
+        console.log("fini")
+        return
     }
+
 }
+
+gamePlay()
