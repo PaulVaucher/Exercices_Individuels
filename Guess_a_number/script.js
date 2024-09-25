@@ -1,30 +1,35 @@
 
 
+// génère un prompt pour demander un nombre
 function askNumber() {
-    let givenNumber = window.prompt("Entrez un nombre")
+    let givenNumber = window.prompt("Entrez un nombre", "0")
     console.log(givenNumber)
     return givenNumber
 }
 
-//askNumber()
-
+// vérifie si la réponse est juste (true) ou non
 function didIWin(givenNumber) {
     givenNumber = Number(askNumber())
     if (givenNumber === 22) {
-        return true
+        result = true
     } else {
-        return false
+        result = false
     }
+    return result
 }
 
 //console.log (didIWin())
 
+
 function gamePlay() {
-    if (didIWin () !== true) {
+    let givenNumber = askNumber()
+    //didIWin(givenNumber)
+    while (didIWin(givenNumber) === false) {
         askNumber()
-        console.log ("raté")
-    } else {
-        console.log("fini")
+        console.log("raté")
+    }
+    if (didIWin(givenNumber) === true) {
+        alert("Bravo ! Vous avez deviné le nombre")
         return
     }
 
