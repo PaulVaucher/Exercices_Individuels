@@ -1,20 +1,23 @@
+gamePlay()
+
 function askNbToFind () {
-    let numberToFind = Number(window.prompt("Joueur1, entrez le nombre à deviner (entre 0 et 50)", "0"))
-if (0 <= numberToFind <= 50) {
-    return numberToFind
+    let NbToFind = Number(window.prompt("Joueur1, entrez le nombre à deviner (entre 0 et 50)"))
+if (0 < NbToFind < 50) {
+    return NbToFind
 }
 else {
     askNbToFind ()
 }
-console.log("à trouver", numberToFind)
+console.log("à trouver", NbToFind)
 }
 
 
 // génère un prompt pour demander un nombre
 function askNumber() {
-    let givenNumber = window.prompt("Entrez un nombre", "0")
-    console.log("prop", givenNumber)
-    return givenNumber
+    let givenNumber = document.getElementById("number")
+    let displayNumber = givenNumber.value
+    console.log("prop", displayNumber)
+    return displayNumber
 }
 
 // vérifie si la réponse est juste (true) ou non
@@ -26,6 +29,7 @@ function didIWin(givenNumber,numberToFind) {
     } else {
         result = false
     }
+    console.log(result)
     return result
 }
 
@@ -35,7 +39,7 @@ function didIWin(givenNumber,numberToFind) {
 function gamePlay() {
     askNbToFind ()
     let givenNumber = askNumber()
-    //didIWin(givenNumber)
+    didIWin(givenNumber)
     while (didIWin(givenNumber) === false) {
         askNumber()
         console.log("raté")
@@ -47,4 +51,3 @@ function gamePlay() {
 
 }
 
-gamePlay()
