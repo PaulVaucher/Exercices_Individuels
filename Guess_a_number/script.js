@@ -50,7 +50,7 @@ function gamePlay() {
     didIWin(givenNumber)
     while (didIWin(givenNumber) === false) {
         askNumber()
-        console.log("raté")
+        console.log("ce n'est pas la bonne réponse")
     }
     if (didIWin(givenNumber) === true) {
         alert("Bravo ! Vous avez deviné le nombre")
