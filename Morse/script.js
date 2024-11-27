@@ -78,16 +78,12 @@ function encode(string) {
     let textToSplit = getLatinCharacterList(upperString)
     let translatedText = []
     for (let char of textToSplit) {
-        translateLatinCharacter(char);
-        /*if (char === undefined) {
-            continue
-        };*/
-        translatedText.push(char);
+        let translation = translateLatinCharacter(char);
+        translatedText.push(translation);
     };
-    //console.log(translatedText);
-    return translatedText;
+    return translatedText.join(' ');
 }
-//encode("Hello, world")
+encode("Hello, world")
 
 /*  */
 function getMorseCharacterList(string) {
@@ -99,7 +95,7 @@ function getMorseCharacterList(string) {
 // getMorseCharacterList(".... . .-.. .-.. --- / .-- --- .-. .-.. -..")
 
 function translateMorseCharacter(character) {
-    console.log(morseToLatin[character]);
+    // console.log(morseToLatin[character]);
     return morseToLatin[character];
 }
 //translateMorseCharacter("---")
@@ -115,4 +111,8 @@ function decode(string) {
     return translatedMorse
 }
 
-decode(".... . .-.. .-.. --- / .-- --- .-. .-.. -..")
+// decode(".... . .-.. .-.. --- / .-- --- .-. .-.. -..")
+
+module.exports = {
+    getLatinCharacterList, encode, decode
+}

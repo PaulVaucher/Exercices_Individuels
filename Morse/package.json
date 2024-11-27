@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@cucumber/cucumber": "^11.1.0"
+  },
+  "scripts" : {
+    "test": "cucumber-js"
+  }
+}
