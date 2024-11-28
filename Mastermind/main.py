@@ -42,26 +42,33 @@ def gameCore():
     if solution == answerList:
         return True
     else:
-        goodColor = len(set(solution)&set(answerList))
-        print(goodColor)
         checkPosition = []
         for i in range(len(solution)):
             checkPosition.append(solution[i] == answerList[i])
-        goodPosition += sum(checkPosition)
-        print(goodPosition)
-        print(str(answerList) + "-> " + str(goodPosition) + " de la bonne couleur à la bonne position / " + str(goodColor) + " de la bonne couleur à la mauvaise position")
+            #(checkPosition)
+        goodPosition += sum(checkPosition) # vérifie si bonne couleur à la bonne position
+        checkColor = []
+        answerTest = answerList.copy()
+        #print ("copie" + str(answerTest))
+        for color in answerTest:
+            if color in answerList[i] == solution[i]:
+                checkColor = answerTest.pop([i])
+        for j in checkColor:
+            print("chk" + str(checkColor))
+            if j in solution:
+                goodColor += 1  # vérifie si bonne couleur à la mauvaise position
+        print(str(answerList) + "-> " + str(goodPosition) + " de la bonne couleur à la bonne position / " 
+        + str(goodColor) + " de la bonne couleur à la mauvaise position")
         return False
         
     
 # Affiche "gagné" si gameCore() renvoie True, lance un nouvel essai si Fale et affiche "perdu" si essais=0 
 def gameCycle ():
-    state = gameCore()
     global essais
     while essais > 0:
-        if state == False:
+        if gameCore() == False:
             essais -= 1
             print ("il vous reste " + str(essais) +" essais")
-            answer()
         else: 
             print ("Bravo ! Vous avez gagné !")
             break
