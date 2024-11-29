@@ -59,18 +59,16 @@ const morseToLatin = {
 /* Récupère la string et sépare les caractères*/
 function getLatinCharacterList(string) {
     let splittedText = string.split('');
-    //console.log(splittedText);
     return splittedText;
 }
-//getLatinCharacterList("Hello, world")
+
 
 
 /* Transforme une lettre en caractère Morse */
 function translateLatinCharacter(character) {
-    //console.log(latinToMorse[character]);
     return latinToMorse[character];
 }
-//translateLatinCharacter('A')
+
 
 /* Transforme un texte en Morse */
 function encode(string) {
@@ -79,40 +77,50 @@ function encode(string) {
     let translatedText = []
     for (let char of textToSplit) {
         let translation = translateLatinCharacter(char);
-        translatedText.push(translation);
+        if (translation === undefined) {
+            // Remplacer les caractères non définis par un "/" (les espaces sont non définis)
+            translatedText.push('/');
+        } else {
+            translatedText.push(translation);
+        }
     };
+    console.log ("texte encodé : ", translatedText.join(' '))
     return translatedText.join(' ');
 }
 encode("Hello, world")
 
-/*  */
+/* Sépare les caractères morse */
 function getMorseCharacterList(string) {
     let splittedMorse = string.split(' ');
-    //console.log(splittedMorse);
     return splittedMorse;
 }
 
-// getMorseCharacterList(".... . .-.. .-.. --- / .-- --- .-. .-.. -..")
 
+/* Transforme un caractère morse en lettre */
 function translateMorseCharacter(character) {
-    // console.log(morseToLatin[character]);
     return morseToLatin[character];
 }
-//translateMorseCharacter("---")
 
+/* Transforme un code morse en phrase */
 function decode(string) {
     let morseToSplit = getMorseCharacterList(string)
     let translatedMorse = []
     for (let char of morseToSplit) {
-        translateMorseCharacter(char);
-        translatedMorse.push(char);
+        let translation = translateMorseCharacter(char);
+        if (translation === undefined) {
+            // Remplace les caractères inconnus par un espace
+            translatedMorse.push(' ');
+        } else {
+            translatedMorse.push(translation);
+        }
     };
-    //console.log(translatedMorse)
-    return translatedMorse
+    console.log ("texte décodé : ", translatedMorse.join(''))
+    return translatedMorse.join('')
 }
 
-// decode(".... . .-.. .-.. --- / .-- --- .-. .-.. -..")
+ decode(".... . .-.. .-.. --- / .-- --- .-. .-.. -..")
 
+/* Exports pour test unitaires */
 module.exports = {
     getLatinCharacterList, encode, decode
 }
