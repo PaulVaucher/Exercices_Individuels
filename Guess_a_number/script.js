@@ -3,18 +3,14 @@ let chosenNumber = null
 gamePlay()
 
 function askNbToFind() {
-
     let NbToFind = Number(prompt("Joueur1, entrez le nombre à deviner (entre 0 et 50)", "0"))
     console.log(NbToFind)
-    if (0 < NbToFind < 50) {
+    if (0 < NbToFind && NbToFind < 50) {
         return NbToFind
+    } else {
+        return askNbToFind()
     }
-    else {
-        askNbToFind()
-    }
-    console.log(typeof (NbToFind))
 }
-
 
 // génère un prompt pour demander un nombre
 function askNumber() {
@@ -26,9 +22,7 @@ function askNumber() {
 
 // vérifie si la réponse est juste (true) ou non
 function didIWin(givenNumber, numberToFind) {
-    givenNumber = Number(askNumber())
-    numberToFind = Number(askNbToFind())
-    if (givenNumber == numberToFind) {
+    if (Number(givenNumber) == numberToFind) {
         result = true
     } else {
         result = false
@@ -37,24 +31,20 @@ function didIWin(givenNumber, numberToFind) {
     return result
 }
 
-//console.log (didIWin())
-
-
-
+// fonction principale du jeu
 function gamePlay() {
     if (chosenNumber == null) {
         chosenNumber = askNbToFind()
-        gamePlay()
     }
-    let givenNumber = askNumber()
-    didIWin(givenNumber)
-    while (didIWin(givenNumber) === false) {
-        askNumber()
-        console.log("ce n'est pas la bonne réponse")
-    }
-    if (didIWin(givenNumber) === true) {
-        alert("Bravo ! Vous avez deviné le nombre")
-        return
-    }
+    document.getElementById("submit").addEventListener("click", function() {
+        let givenNumber = askNumber()
+        if (didIWin(givenNumber, chosenNumber)) {
+            document.getElementById("submit").hidden = true
+            document.getElementById("number").hidden = true
+            document.getElementById("result").innerHTML = ("Bravo ! Vous avez deviné le nombre")
+        } else {
+            document.getElementById("result").innerHTML = ("ce n'est pas la bonne réponse")
+        }
+    })
 }
 
